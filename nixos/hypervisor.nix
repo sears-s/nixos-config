@@ -11,7 +11,21 @@ lib.mkIf specialArgs.hypervisor {
 
   # Enable libvirt
   virtualisation = {
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        ovmf.packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd
+        ];
+        # To only emulate host arch:
+        # package = pkgs.qemu_kvm;
+        swtpm.enable = true;
+        vhostUserPackages = [ pkgs.virtiofsd ];
+      };
+    };
     spiceUSBRedirection.enable = true;
   };
 

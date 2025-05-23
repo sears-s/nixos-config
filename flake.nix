@@ -18,6 +18,23 @@
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    winapps = {
+      url = "github:winapps-org/winapps";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  # nix.conf
+  nixConfig = {
+    # Add more binary caches
+    extra-substituters = [
+      "https://lanzaboote.cachix.org"
+      "https://winapps.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "lanzaboote.cachix.org-1:Nt9//zGmqkg1k5iu+B3bkj3OmHKjSw9pvf3faffLLNk="
+      "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
+    ];
   };
 
   outputs =

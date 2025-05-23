@@ -112,6 +112,9 @@
           # Podman directory
           ++ lib.optional config.virtualisation.containers.enable ".local/share/containers"
 
+          # Winapps directory
+          ++ lib.optional specialArgs.hypervisor ".local/share/winapps"
+
           # GUI application directories
           ++ lib.optionals specialArgs.graphical [
             ".config/BraveSoftware/Brave-Browser"
@@ -120,6 +123,7 @@
             ".config/spotify"
             ".config/Slack"
             ".mozilla/firefox"
+            ".local/share/applications"
             ".local/share/keyrings"
             ".local/share/remmina"
             ".local/state/wireplumber"
@@ -235,7 +239,12 @@
         extraGroups =
           [ "wheel" ]
           ++ lib.optional config.networking.networkmanager.enable "networkmanager"
-          ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd";
+          ++ lib.optionals config.virtualisation.libvirtd.enable [
+            "libvirtd"
+            # Required by winapps
+            "libvirt"
+            "kvm"
+          ];
         hashedPasswordFile = "${specialArgs.persistDir}/hashedPassword";
         isNormalUser = true;
         openssh.authorizedKeys.keys = [ specialArgs.sshPublicKey ];
