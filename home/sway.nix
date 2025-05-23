@@ -265,6 +265,15 @@ lib.mkIf specialArgs.graphical {
     # Tray icon for Bluetooth manager
     blueman-applet.enable = osConfig.hardware.bluetooth.enable;
 
+    # Reduces blue light at night
+    gammastep = lib.mkIf (!specialArgs.vm) {
+      enable = true;
+      # TODO: switch to geoclue2 when working
+      # provider = "geoclue2";
+      latitude = 29.4;
+      longitude = -98.5;
+    };
+
     # Notifications
     mako = {
       enable = true;
