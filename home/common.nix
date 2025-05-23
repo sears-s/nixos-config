@@ -7,14 +7,6 @@
   ...
 }:
 {
-  # Set virt-manager connection
-  dconf.settings = lib.mkIf (osConfig.programs.virt-manager.enable == true) {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
-    };
-  };
-
   # Set state version
   home.stateVersion = specialArgs.stateVersion;
 

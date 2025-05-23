@@ -14,6 +14,10 @@ lib.mkIf specialArgs.hypervisor {
     in
     {
       "${path}".xmleditor-enabled = true;
+      "${path}/connections" = {
+        autoconnect = [ "qemu:///system" ];
+        uris = [ "qemu:///system" ];
+      };
       "${path}/console".resize-guest = 1;
       "${path}/new-vm" = {
         cpu-default = "host-passthrough";
