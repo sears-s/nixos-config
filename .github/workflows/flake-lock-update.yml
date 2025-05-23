@@ -1,0 +1,24 @@
+name: Weekly flake.lock update
+on:
+  schedule:
+    - cron: "0 0 * * 0" # at 00;00 on Sunday
+  workflow_dispatch: # allow manual trigger
+jobs:
+  flake-lock-update:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the git repository
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Update flake.lock
+        run: nix flake update
+      - name: Commit and push the change
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Weekly flake.lock update
+          file_pattern: flake.lock
