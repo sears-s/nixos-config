@@ -96,7 +96,7 @@
 
         directories =
           [
-            # User SSH directory
+            ".cache"
             {
               directory = ".ssh";
               mode = "0700";

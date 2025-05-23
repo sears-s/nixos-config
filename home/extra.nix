@@ -1,4 +1,11 @@
-{ config, lib, osConfig, pkgs, specialArgs, ... }:
+{
+  config,
+  lib,
+  osConfig,
+  pkgs,
+  specialArgs,
+  ...
+}:
 lib.mkIf specialArgs.extra {
 
   # Programs not available as a home-manager program
@@ -25,7 +32,16 @@ lib.mkIf specialArgs.extra {
     # Alternative to grep
     ripgrep = {
       enable = true;
-      arguments = [ "--hidden" "--smart-case" ];
+      arguments = [
+        "--hidden"
+        "--smart-case"
+      ];
+    };
+
+    # Alternative to man (tldr)
+    tealdeer = {
+      enable = true;
+      settings.updates.auto_update = true;
     };
   };
 }
