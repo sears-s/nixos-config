@@ -202,14 +202,14 @@
   system = {
     # Update weekly from GitHub Flake
     autoUpgrade = {
-      enable = false; # TODO: disable until GitHub setup
+      enable = true;
       allowReboot = true;
       rebootWindow = {
         lower = "02:00";
         upper = "04:00";
       };
       dates = "weekly";
-      flake = "github:sears-s/nix-config";
+      flake = "github:sears-s/nixos-config";
     };
 
     # System version to base persistent data off of - do not change
