@@ -16,13 +16,12 @@ lib.mkIf specialArgs.graphical {
   home.packages =
     with pkgs;
     [
-      # TODO: bluebubbles
+      bluebubbles # iMessage client
       foliate # eBook reader
       font-awesome # extra icons
       obsidian # markdown notes
       onlyoffice-desktopeditors # office suite
-      # TODO: replace with nerd-fonts.* in 25.05
-      (nerdfonts.override { fonts = [ specialArgs.fontMono ]; }) # font with icons
+      nerd-fonts.comic-shanns-mono # font with icons
       pavucontrol # audio controller
       qbittorrent # BitTorrent client
       remmina # RDP/VNC client
@@ -277,8 +276,10 @@ lib.mkIf specialArgs.graphical {
     # Notifications
     mako = {
       enable = true;
-      defaultTimeout = 10000; # 10s
-      ignoreTimeout = true;
+      settings = {
+        default-timeout = 10000; # 10s
+        ignore-timeout = true;
+      };
     };
 
     # Idle manager

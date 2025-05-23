@@ -188,10 +188,6 @@
     # Firmware updater
     fwupd.enable = true;
 
-    # Fix geoclue2 provider URL
-    # TODO: fixed in new release?
-    geoclue2.geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
-
     # SSH server
     openssh = {
       enable = true;
