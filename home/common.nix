@@ -26,7 +26,7 @@
             "TODO" # https://www.reddit.com/r/NixOS/comments/1d1apm0/impermanence_and_discovering_what_needs_to_be/
           else
             "sudo find / -mount -type f -printf '%h/%f\\n' | grep -iv cache | less";
-        nixr = "sudo nixos-rebuild switch --flake /home/${specialArgs.username}/proj/nixos-config/";
+        nixr = "sudo nixos-rebuild switch --flake /home/${specialArgs.username}/proj/nixos-config/ --accept-flake-config";
         top = lib.mkIf config.programs.bottom.enable "bottom";
       };
     };

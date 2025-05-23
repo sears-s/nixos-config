@@ -16,7 +16,7 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v31
       - name: Update flake.lock
-        run: nix flake update
+        run: nix flake update --accept-flake-config
       - name: Commit and push the change
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
