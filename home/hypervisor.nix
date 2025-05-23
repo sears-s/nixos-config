@@ -36,5 +36,8 @@ lib.mkIf specialArgs.hypervisor {
     RDP_PASS="admin"
     WAFLAVOR="libvirt"
     RDP_SCALE="100"
+    # Suspend VM after 5 minutes
+    AUTOPAUSE="on"
+    AUTOPAUSE_TIME="300"
   '';
 }
