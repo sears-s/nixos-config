@@ -21,12 +21,11 @@ enable_network 0
 quit
 ```
 
-Set `root` password with `passwd` to continue installation over SSH. Install Git and clone this repo:
+Set `root` password with `passwd` to continue installation over SSH. Clone this repository:
 
 ```bash
-nix-env -f '<nixpkgs>' -iA git
-git clone https://github.com/sears-s/nix-config.git
-cd nix-config
+git clone https://github.com/sears-s/nixos-config.git
+cd nixos-config
 ```
 
 If RAM is less than 4GB, a temporary swap with an external disk may be needed:
