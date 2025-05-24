@@ -97,6 +97,7 @@
         directories =
           [
             ".cache"
+            ".local/share/systemd/timers"
             {
               directory = ".ssh";
               mode = "0700";
@@ -185,6 +186,13 @@
   programs.fish.enable = true;
 
   services = {
+    # Encrypted DNS
+    dnscrypt-proxy2 = {
+      enable = true;
+      settings.require_dnssec = true;
+      # Defaults: https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
+    };
+
     # Firmware updater
     fwupd.enable = true;
 
