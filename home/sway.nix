@@ -271,6 +271,7 @@ lib.mkIf specialArgs.graphical {
       # provider = "geoclue2";
       latitude = 29.4;
       longitude = -98.5;
+      temperature.night = 2000;
     };
 
     # Notifications
