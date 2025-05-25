@@ -74,7 +74,6 @@
           };
           lsp = {
             enable = true;
-            luaConfig.post = ''vim.lsp.set_log_level("debug")'';
             servers.powershell_es = {
               enable = true;
               extraOptions = {
