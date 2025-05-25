@@ -68,7 +68,7 @@
               swapSize = "4G";
               tmpfsSize = "2G";
             };
-            editor = "neovim";
+            editor = "nvim";
             extra = true;
             fontMono = "ComicShannsMono";
             graphical = false;
