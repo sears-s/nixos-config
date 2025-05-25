@@ -14,12 +14,16 @@ lib.mkIf specialArgs.hypervisor {
     libvirtd = {
       enable = true;
       qemu = {
-        ovmf.packages = [
-          (pkgs.OVMF.override {
-            secureBoot = true;
-            tpmSupport = true;
-          }).fd
-        ];
+        # Makes rebuilding longer since OVMF needs to be compiled
+        # Also breaks VMs on update: https://github.com/NixOS/nixpkgs/issues/378894
+        /*
+          ovmf.packages = [
+            (pkgs.OVMF.override {
+              secureBoot = true;
+              tpmSupport = true;
+            }).fd
+          ];
+        */
         # To only emulate host arch:
         # package = pkgs.qemu_kvm;
         swtpm.enable = true;

@@ -72,6 +72,19 @@
               format_on_save.lsp_format = "fallback";
             };
           };
+          lsp = {
+            enable = true;
+            luaConfig.post = ''vim.lsp.set_log_level("debug")'';
+            servers.powershell_es = {
+              enable = true;
+              extraOptions = {
+                bundle_path = "${pkgs.powershell-editor-services}/lib/powershell-editor-services";
+                shell = lib.getExe pkgs.powershell;
+              };
+              package = pkgs.powershell-editor-services;
+              settings.powershell.codeFormatting.Preset = "OTBS";
+            };
+          };
           which-key.enable = true;
         };
         viAlias = true;
