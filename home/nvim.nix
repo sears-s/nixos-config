@@ -81,7 +81,14 @@
                 shell = lib.getExe pkgs.powershell;
               };
               package = pkgs.powershell-editor-services;
-              settings.powershell.codeFormatting.Preset = "OTBS";
+              settings.powershell.codeFormatting = {
+                ignoreOneLineBlock = false;
+                preset = "OTBS";
+                useConstantStrings = true;
+                useCorrectCasing = true;
+                trimWhitespaceAroundPipe = true;
+                whitespaceBetweenParameters = true;
+              };
             };
           };
           which-key.enable = true;

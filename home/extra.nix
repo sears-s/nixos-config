@@ -10,6 +10,7 @@ lib.mkIf specialArgs.extra {
 
   # Programs not available as a home-manager program
   home.packages = with pkgs; [
+    devenv # Nix development environments
     dua # alternative to du/ncdu
     distrobox
     glow # terminal Markdown renderer
@@ -21,6 +22,12 @@ lib.mkIf specialArgs.extra {
   programs = {
     # Alternative to top
     bottom.enable = true;
+
+    # Development environment switcher
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
 
     # Alternative to ls
     # TODO: aliases and options
