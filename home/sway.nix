@@ -29,7 +29,7 @@ lib.mkIf specialArgs.graphical {
       spotify # official Spotify client
       vlc # video player
       wl-clipboard # Wayland clipboard support
-      zoom # official Zoom client
+      zoom-us # official Zoom client
     ]
     ++
       lib.optional (specialArgs.hostName != "mip") # canary.dl2.discordapp.net blocked
@@ -170,7 +170,7 @@ lib.mkIf specialArgs.graphical {
           };
           disk = {
             inherit interval;
-            format = "{percentage_used}% 󰗮";
+            format = "{percentage_used}% 󰑹";
             path = specialArgs.persistDir;
           };
           idle_inhibitor = lib.mkIf (!specialArgs.vm) {
@@ -191,7 +191,7 @@ lib.mkIf specialArgs.graphical {
           };
           memory = {
             inherit interval;
-            format = "{percentage}% ";
+            format = "{percentage}% 󰘚";
             tooltip-format = "{used:0.1f} / {total:0.1f} GiB used ({percentage}%) | swap: {swapUsed:0.1f} / {swapTotal:0.1f} GiB used ({swapPercentage}%)";
           };
           network = {
@@ -200,7 +200,6 @@ lib.mkIf specialArgs.graphical {
             format-ethernet = "{ipaddr}/{cidr} ";
             format-linked = "{ifname} (no ip) ";
             format-disconnected = "off ";
-            format-alt = "{ifname} = {ipaddr}/{cidr} ";
             tooltip-format = "{ifname} = {ipaddr}/{cidr} via {gwaddr}";
             on-click = lib.getExe' pkgs.networkmanager "nmtui";
           };
@@ -398,17 +397,68 @@ lib.mkIf specialArgs.graphical {
       menu = "${lib.getExe pkgs.rofi} -show drun";
       modifier = "Mod4";
 
-      # Ensure kanshi runs when sway reloaded
-      startup = lib.optional config.services.kanshi.enable {
-        always = true;
-        command = "${lib.getExe' pkgs.systemd "systemctl"} --user restart kanshi.service";
-      };
+      startup =
+        # sworkstyle - adds icons to workspaces
+        [
+          {
+            always = true;
+            command = "${lib.getExe pkgs.swayest-workstyle} --deduplicate &> /tmp/sworkstyle.log";
+          }
+        ]
+
+        # Ensure kanshi runs when sway reloaded
+        ++ lib.optional config.services.kanshi.enable {
+          always = true;
+          command = "${lib.getExe' pkgs.systemd "systemctl"} --user restart kanshi.service";
+        };
 
       terminal = lib.getExe pkgs.foot;
     };
   };
 
   xdg = {
+    # Configure sworkstyle
+    configFile."sworkstyle/config.toml" = {
+      # Reload sway like its own module
+      onChange = config.xdg.configFile."sway/config".onChange;
+      text = ''
+        fallback = ''
+
+        [matching]
+        '.blueman-manager-wrapped' = '󰂯'
+        '.virt-manager-wrapped' = ''
+        'bluebubbles' = '󰣓'
+        'Brave-browser' = ''
+        'com.github.johnfactotum.Foliate' = ''
+        'com.obsproject.Studio' = '󰑋'
+        'discord' = ''
+        'firefox' = '󰈹'
+        'ghidra-Ghidra' = ''
+        'obsidian' = '󰠮'
+        'ONLYOFFICE' = '󰏆'
+        'org.pulseaudio.pavucontrol' = '󰕾'
+        'org.qbittorrent.qBittorrent' = '󰍇'
+        'org.remmina.Remmina' = '󰢹'
+        'org.wireshark.Wireshark' = '󱙳'
+        'Slack' = '󰒱'
+        'Spotify' = '󰓇'
+        'vlc' = '󰕼'
+        'zoom' = '󰍫'
+
+        # Terminal
+        '/gdb.*/' = ''
+        '/lazygit.*/' = ''
+        '/(vi|vim|nvim).*/' = ''
+        'foot' = ''
+
+        # winapps
+        'Microsoft Excel' = '󱎏'
+        'Microsoft PowerPoint' = '󱎐'
+        'Microsoft Word' = '󱎒'
+        '/Windows RDP Session.*/' = '󰖳'
+      '';
+    };
+
     # Set default apps
     mimeApps = {
       enable = true;
