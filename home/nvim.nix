@@ -14,6 +14,17 @@
         # colorscheme = "TODO";
         clipboard.register = "unnamedplus";
         defaultEditor = true;
+
+        # Set leader key to space
+        globals.mapleader = " ";
+
+        keymaps = [
+          {
+            action = "<cmd>LazyGit<cr>";
+            key = "<leader>lg";
+          }
+        ];
+
         opts = {
           # Tab options
           expandtab = true;
@@ -72,8 +83,12 @@
               format_on_save.lsp_format = "fallback";
             };
           };
+          lazygit.enable = true;
+
           lsp = {
             enable = true;
+
+            # LSP and formatter for PowerShell
             servers.powershell_es = {
               enable = true;
               extraOptions = {
@@ -81,6 +96,8 @@
                 shell = lib.getExe pkgs.powershell;
               };
               package = pkgs.powershell-editor-services;
+
+              # More opinionated PowerShell formatting
               settings.powershell.codeFormatting = {
                 ignoreOneLineBlock = false;
                 preset = "OTBS";
