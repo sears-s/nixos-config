@@ -5,6 +5,10 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,11 +42,19 @@
   };
 
   outputs =
-    inputs:
+    { self, ... }@inputs:
     let
       # Saving this if custom lib needed
       # lib = nixpkgs.lib.extend (final: prev: { custom = import ./lib.nix prev; });
       inherit (inputs.nixpkgs) lib;
+
+      # Function to run on all systems
+      forAllSystems = lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+
+      # Function to make a host for nixosConfigurations
       mkHost =
         { hostName, ... }@settings:
         let
@@ -108,17 +120,94 @@
               [
                 inputs.home-manager.nixosModules.home-manager
                 {
-                  home-manager.extraSpecialArgs = specialArgs;
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users.${specialArgs.username} = {
-                    imports = lib.filesystem.listFilesRecursive ./home ++ ifExists ./hosts/${hostName}-home.nix;
+                  home-manager = {
+                    extraSpecialArgs = specialArgs;
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    users.${specialArgs.username} = {
+                      imports = lib.filesystem.listFilesRecursive ./home ++ ifExists ./hosts/${hostName}-home.nix;
+                    };
                   };
                 }
               ];
         };
     in
     {
+      # Pre-commit hooks
+      checks = forAllSystems (system: {
+        pre-commit-check = inputs.git-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            # Check for secrets
+            detect-private-keys.enable = true;
+            ripsecrets.enable = true;
+            # TODO: re-enable when fixed upstream
+            # trufflehog.enable = true;
+
+            # Misc
+            check-added-large-files.enable = true;
+            check-case-conflicts.enable = true;
+            check-executables-have-shebangs.enable = true;
+            check-shebang-scripts-are-executable.enable = true;
+            mixed-line-endings.enable = true;
+            trim-trailing-whitespace.enable = true;
+
+            # Format and lint Nix files
+            nixfmt-rfc-style.enable = true;
+            statix.enable = true;
+
+            # Scan Nix files for dead code
+            deadnix = {
+              enable = true;
+              # Allow the same variables at top of each file
+              settings.noLambdaPatternNames = true;
+            };
+
+            # Format Markdown and YAML files
+            prettier = {
+              enable = true;
+              excludes = [ "flake.lock" ];
+            };
+
+            # Lint Markdown files
+            markdownlint.enable = true;
+
+            # Lint YAML files
+            check-yaml.enable = true;
+            yamllint = {
+              enable = true;
+              settings.configData = "{extends: relaxed}";
+            };
+
+            # Format and lint shell scripts
+            shfmt = {
+              enable = true;
+              # Spaces instead of tabs
+              args = [
+                "-i"
+                "2"
+              ];
+            };
+            shellcheck.enable = true;
+
+            # Lint GitHub actions
+            actionlint.enable = true;
+
+            # Check for typos
+            typos.enable = true;
+          };
+        };
+      });
+
+      # devShell to run pre-commit checks
+      devShells = forAllSystems (system: {
+        default = inputs.nixpkgs.legacyPackages.${system}.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+          buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
+        };
+      });
+
+      # Create the NixOS hosts
       nixosConfigurations = {
         karen = mkHost {
           hostName = "karen";

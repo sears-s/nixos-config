@@ -9,8 +9,8 @@
   imports = [ specialArgs.inputs.disko.nixosModules.disko ];
   disko.devices = {
     disk.main = {
+      inherit (specialArgs.disk) device;
       type = "disk";
-      device = specialArgs.disk.device;
       content = {
         type = "gpt";
         partitions = {
@@ -37,13 +37,13 @@
             size = "100%";
             content =
               let
+                # Common mount options
                 btrfsMountOptions = [
                   "compress-force=zstd:2"
                   "noatime"
                 ];
-              in
-              let
-                # Encrupted partition
+
+                # Encrypted partition
                 luks = {
                   name = "luks";
                   type = "luks";
@@ -60,7 +60,7 @@
                     "-i 3000" # milliseconds for key derivation
                   ];
                   content = {
-                    # Uncencrypted partition
+                    # Unencrypted partition
                     type = "btrfs";
                     extraArgs = [
                       "-f" # Override existing parittion

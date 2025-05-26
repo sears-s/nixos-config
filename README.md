@@ -51,6 +51,21 @@ Run the installer for the desired configuration:
 1. Enable secure boot in the BIOS
 1. Boot back into NixOS and verify secure boot is enabled with `sudo bootctl status`
 
+## Pre-Commit Checks
+
+To run the checks without changing any files:
+
+```bash
+nix flake check --accept-flake-config
+```
+
+To run the checks and have formatters modify files:
+
+```bash
+nix develop --accept-flake-config
+pre-commit run -a
+```
+
 ## Commands
 
 If getting a database error for `command-not-found`:

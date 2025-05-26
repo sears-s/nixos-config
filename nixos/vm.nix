@@ -1,4 +1,12 @@
-{ config, lib, pkgs, specialArgs, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  specialArgs,
+  modulesPath,
+  ...
+}:
+{
   # If lib.mkIf is used, imports isn't recognized
   imports = lib.optionals specialArgs.vm [
     # Enable QEMU guest kernel modules

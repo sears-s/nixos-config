@@ -356,10 +356,13 @@ lib.mkIf specialArgs.graphical {
       keybindings =
         let
           mod = config.wayland.windowManager.sway.config.modifier;
-          left = config.wayland.windowManager.sway.config.left;
-          right = config.wayland.windowManager.sway.config.right;
-          up = config.wayland.windowManager.sway.config.up;
-          down = config.wayland.windowManager.sway.config.down;
+          /*
+            Unused for now
+            left = config.wayland.windowManager.sway.config.left;
+            right = config.wayland.windowManager.sway.config.right;
+            up = config.wayland.windowManager.sway.config.up;
+            down = config.wayland.windowManager.sway.config.down;
+          */
           brightnessCmd = "exec ${lib.getExe pkgs.brightnessctl} -q set 5%";
           volumeCmd = "exec ${lib.getExe' pkgs.pulseaudio "pactl"} set-sink-volume @DEFAULT_SINK@";
           volumeMicCmd = "exec ${lib.getExe' pkgs.pulseaudio "pactl"} set-source-volume @DEFAULT_SOURCE@";
@@ -423,7 +426,7 @@ lib.mkIf specialArgs.graphical {
     # Configure sworkstyle
     configFile."sworkstyle/config.toml" = {
       # Reload sway like its own module
-      onChange = config.xdg.configFile."sway/config".onChange;
+      inherit (config.xdg.configFile."sway/config") onChange;
       text = ''
         fallback = ''
 

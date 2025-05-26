@@ -21,7 +21,7 @@
   };
 
   hardware = {
-    # Disable Bluetooh
+    # Disable Bluetooth
     bluetooth.enable = lib.mkForce false;
 
     # CPU microcode

@@ -138,11 +138,11 @@
 
   # Networking configuration
   networking = {
+    # Set hostname
+    inherit (specialArgs) hostName;
+
     # Enable firewall
     firewall.enable = true;
-
-    # Set hostname
-    hostName = specialArgs.hostName;
 
     # DHCP by default
     # Conflicts with networkmanager module
@@ -208,6 +208,9 @@
   };
 
   system = {
+    # System version to base persistent data off of - do not change
+    inherit (specialArgs) stateVersion;
+
     # Update weekly from GitHub Flake
     autoUpgrade = {
       enable = true;
@@ -219,9 +222,6 @@
       dates = "weekly";
       flake = "github:sears-s/nixos-config";
     };
-
-    # System version to base persistent data off of - do not change
-    stateVersion = specialArgs.stateVersion;
   };
 
   # Set the timezone

@@ -1,4 +1,11 @@
-{ config, lib, osConfig, pkgs, specialArgs, ... }:
+{
+  config,
+  lib,
+  osConfig,
+  pkgs,
+  specialArgs,
+  ...
+}:
 lib.mkIf specialArgs.security {
 
   # Programs not available as a home-manager program
