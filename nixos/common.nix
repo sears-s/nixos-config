@@ -46,11 +46,16 @@
       dates = [ "weekly" ];
     };
 
-    # Enable Flakes
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+      # Enable Flakes
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+
+      # Set trusted user
+      trusted-users = [ specialArgs.username ];
+    };
   };
 
   nixpkgs = {
