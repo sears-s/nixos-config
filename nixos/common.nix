@@ -8,41 +8,11 @@
 {
   # TODO: move this
   imports = [ specialArgs.inputs.impermanence.nixosModules.impermanence ];
-  boot = {
-    # If not using tmpfs for snapshots, rollback the BTRFS subvolume
-    initrd.postResumeCommands = lib.mkIf (specialArgs.disk.tmpfsSize == "0G") (
-      lib.mkAfter ''
-        mp=$(mktemp -d)
-        mount -o subvol=root ${specialArgs.disk.rootDevice} $mp
-        if [[ -e $mp/root ]]; then
-          mkdir -p $mp/old_roots
-          timestamp=$(date --date="@$(stat -c %Y $mp/root)" "+%Y-%m-%-d_%H:%M:%S")
-          mv $mp/root "$mp/old_roots/$timestamp"
-        fi
 
-        delete_subvolume_recursively() {
-          IFS=$'\n'
-          for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-            delete_subvolume_recursively "$mp/$i"
-          done
-          btrfs subvolume delete "$1"
-        }
-
-        for i in $(find $mp/old_roots/ -maxdepth 1 -mtime +30); do
-          delete_subvolume_recursively "$i"
-        done
-
-        btrfs subvolume create $mp/root
-        umount $mp
-        rm -rf $mp
-      ''
-    );
-
-    # Use the systemd-boot EFI boot loader
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
+  # Use the systemd-boot EFI boot loader
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
   environment = {

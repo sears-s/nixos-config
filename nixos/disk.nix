@@ -7,6 +7,7 @@
 }:
 {
   imports = [ specialArgs.inputs.disko.nixosModules.disko ];
+
   disko.devices = {
     disk.main = {
       inherit (specialArgs.disk) device;
@@ -14,12 +15,14 @@
       content = {
         type = "gpt";
         partitions = {
+
           # Boot partition for MBR/BIOS compatibility
           boot = {
             name = "boot";
             size = "1M";
             type = "EF02";
           };
+
           # ESP partition for UEFI
           esp = {
             name = "esp";
@@ -32,6 +35,7 @@
               mountOptions = [ "umask=0077" ];
             };
           };
+
           # System partition
           system = {
             size = "100%";
@@ -60,23 +64,14 @@
                     "-i 3000" # milliseconds for key derivation
                   ];
                   content = {
+
                     # Unencrypted partition
                     type = "btrfs";
                     extraArgs = [
                       "-f" # Override existing parittion
                       "--csum xxhash" # Slightly faster and more secure checksum algorithm than default CRC32
                     ];
-                    postCreateHook = lib.mkIf (specialArgs.disk.tmpfsSize == "0G") ''
-                      mp=$(mktemp -d)
-                      mount -o subvol=root ${specialArgs.disk.rootDevice} $mp
-                      trap 'umount $mp; rm -rf $mp' EXIT
-                      btrfs subvolume snapshot -r $mp/root $mp/root-blank
-                    '';
                     subvolumes = {
-                      root = lib.mkIf (specialArgs.disk.tmpfsSize == "0G") {
-                        mountpoint = "/";
-                        mountOptions = btrfsMountOptions;
-                      };
                       nix = {
                         mountpoint = "/nix";
                         mountOptions = btrfsMountOptions;
@@ -98,8 +93,9 @@
         };
       };
     };
+
     # RAM partition for files that will not persist
-    nodev."/" = lib.mkIf (specialArgs.disk.tmpfsSize != "0G") {
+    nodev."/" = {
       fsType = "tmpfs";
       mountOptions = [
         "size=${specialArgs.disk.tmpfsSize}"
