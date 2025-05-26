@@ -1,5 +1,7 @@
 {
+  config,
   lib,
+  osConfig,
   pkgs,
   specialArgs,
   ...
@@ -14,6 +16,11 @@
         # colorscheme = "TODO";
         clipboard.register = "unnamedplus";
         defaultEditor = true;
+
+        # Aliases
+        viAlias = true;
+        vimAlias = true;
+        vimdiffAlias = true;
 
         # Set leader key to space
         globals.mapleader = " ";
@@ -69,6 +76,8 @@
           undofile = true;
         };
         plugins = {
+
+          # Conform for formatting
           conform-nvim = {
             enable = true;
             settings = {
@@ -83,8 +92,14 @@
               format_on_save.lsp_format = "fallback";
             };
           };
+
+          # Hints to improve motions
+          hardtime.enable = true;
+
+          # Floating window for lazygit
           lazygit.enable = true;
 
+          # TODO: move outside of plugins once servers.powershell_es available
           lsp = {
             enable = true;
 
@@ -108,11 +123,10 @@
               };
             };
           };
+
+          # Hints for keymaps
           which-key.enable = true;
         };
-        viAlias = true;
-        vimAlias = true;
-        vimdiffAlias = true;
       };
     }
   ];
