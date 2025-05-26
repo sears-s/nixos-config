@@ -6,7 +6,7 @@
   specialArgs,
   ...
 }:
-lib.mkIf specialArgs.hypervisor {
+lib.mkIf (specialArgs.graphical && specialArgs.hypervisor) {
   # Set virt-manager settings
   dconf.settings =
     let

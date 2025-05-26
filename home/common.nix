@@ -51,14 +51,12 @@
     # home-manager
     home-manager.enable = true;
 
-    # neovim
-    /*
-      neovim = {
-        enable = true;
-        defaultEditor = true;
-        viAlias = true;
-        vimAlias = true;
-      };
-    */
+    # neovim without nixvim if minimal system
+    neovim = lib.mkIf (!specialArgs.extra) {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+    };
   };
 }

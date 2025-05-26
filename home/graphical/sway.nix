@@ -13,35 +13,15 @@ lib.mkIf specialArgs.graphical {
     defaultFonts.monospace = [ "${specialArgs.fontMono} Nerd Font Mono" ];
   };
 
-  home.packages =
-    with pkgs;
-    [
-      bluebubbles # iMessage client
-      foliate # eBook reader
-      font-awesome # extra icons
-      obsidian # markdown notes
-      onlyoffice-desktopeditors # office suite
-      nerd-fonts.comic-shanns-mono # font with icons
-      pavucontrol # audio controller
-      qbittorrent # BitTorrent client
-      remmina # RDP/VNC client
-      slack # official Slack client
-      spotify # official Spotify client
-      vlc # video player
-      wl-clipboard # Wayland clipboard support
-      zoom-us # official Zoom client
-    ]
-    ++
-      lib.optional (specialArgs.hostName != "mip") # canary.dl2.discordapp.net blocked
-        discord-canary; # official Discord client, beta Wayland support
+  home.packages = with pkgs; [
+    font-awesome # extra icons
+    nerd-fonts.comic-shanns-mono # font with icons
+    pavucontrol # audio controller
+    wl-clipboard # Wayland clipboard support
+  ];
 
   programs = {
-    # Brave browser
-    chromium = {
-      enable = true;
-      package = pkgs.brave;
-    };
-
+    # Firefox with extensions
     firefox = {
       enable = true;
       policies = {
@@ -71,9 +51,6 @@ lib.mkIf specialArgs.graphical {
       enable = true;
       settings.main.font = "${specialArgs.fontMono} Nerd Font Mono:size=11";
     };
-
-    # Screen recorder
-    obs-studio.enable = true;
 
     # Launcher
     # TODO: add plugins
@@ -463,29 +440,6 @@ lib.mkIf specialArgs.graphical {
         'Microsoft Word' = '󱎒'
         '/Windows RDP Session.*/' = '󰖳'
       '';
-    };
-
-    # Set default apps
-    mimeApps = {
-      enable = true;
-      defaultApplications =
-        let
-          browser = [ "brave-browser.desktop" ];
-        in
-        {
-          "application/pdf" = browser;
-          "application/x-extension-htm" = browser;
-          "application/x-extension-html" = browser;
-          "application/x-extension-shtml" = browser;
-          "application/x-extension-xht" = browser;
-          "application/x-extension-xhtml" = browser;
-          "application/xhtml+xml" = browser;
-          "x-scheme-handler/about" = browser;
-          "x-scheme-handler/chrome" = browser;
-          "x-scheme-handler/http" = browser;
-          "x-scheme-handler/https" = browser;
-          "x-scheme-handler/unknown" = browser;
-        };
     };
 
     # XDG portal

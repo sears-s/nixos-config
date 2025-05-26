@@ -7,7 +7,7 @@
 }:
 lib.mkIf specialArgs.hypervisor {
   # Enable client (virt-manager)
-  programs.virt-manager.enable = true;
+  programs.virt-manager.enable = specialArgs.graphical;
 
   # Enable libvirt
   virtualisation = {

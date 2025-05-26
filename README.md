@@ -59,7 +59,7 @@ To run the checks without changing any files:
 nix flake check --accept-flake-config
 ```
 
-To run the checks and have formatters modify files:
+To install the hook and run the checks with formatters modifying files:
 
 ```bash
 nix develop --accept-flake-config

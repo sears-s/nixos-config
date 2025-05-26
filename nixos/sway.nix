@@ -17,7 +17,7 @@ lib.mkIf specialArgs.graphical {
     polkit.enable = true;
   };
 
-  # Enable greeter if no VM
+  # Enable greeter if not VM
   services.greetd = lib.mkIf (!specialArgs.vm) {
     enable = true;
     settings.default_session = {
