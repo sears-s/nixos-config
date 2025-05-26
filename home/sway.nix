@@ -367,8 +367,11 @@ lib.mkIf specialArgs.graphical {
         in
         # mkOptionDefault merges with default configuration
         lib.mkOptionDefault {
-          # Close window with shift
+          # Close window without shift
           "${mod}+q" = "kill";
+
+          # Open browser with Super+[i]nternet
+          "${mod}+i" = "exec ${lib.getExe pkgs.brave}";
 
           # Move workspaces between displays
           "${mod}+greater" = "move workspace to output right";

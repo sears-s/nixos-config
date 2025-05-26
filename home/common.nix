@@ -42,6 +42,7 @@
         gpg.format = "ssh";
         http."https://code.levelup.cce.af.mil".sslVerify = false;
         init.defaultBranch = "main";
+        push.autoSetupRemote = true;
         user = {
           email = "36250748+sears-s@users.noreply.github.com";
           name = "Sears Schulz";
