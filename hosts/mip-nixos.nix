@@ -42,6 +42,14 @@
     "ARGOS-DC-2.argos.net"
   ];
 
-  # Load Nvidia driver to Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services = {
+    # Can't use here
+    dnscrypt-proxy2.enable = lib.mkForce false;
+
+    # Need resolved for WireGuard
+    resolved.enable = true;
+
+    # Load Nvidia driver to Xorg and Wayland
+    xserver.videoDrivers = [ "nvidia" ];
+  };
 }
