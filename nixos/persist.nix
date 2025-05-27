@@ -86,6 +86,7 @@
         ".config/remmina"
         ".config/spotify"
         ".config/Slack"
+        ".local/share/app.bluebubbles.BlueBubbles"
         ".local/share/remmina"
       ];
   };
