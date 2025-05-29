@@ -82,11 +82,13 @@
             enable = true;
             settings = {
               formatters_by_ft = {
+                markdown = [ "prettierd" ];
                 nix = [ "nixfmt" ];
                 python = [ "ruff" ];
               };
               formatters = {
                 nixfmt.command = lib.getExe pkgs.nixfmt-rfc-style;
+                prettierd.command = lib.getExe pkgs.prettierd;
                 ruff.command = lib.getExe pkgs.ruff;
               };
               format_on_save.lsp_format = "fallback";
