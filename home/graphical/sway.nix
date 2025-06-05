@@ -18,6 +18,7 @@ lib.mkIf specialArgs.graphical {
     nerd-fonts.comic-shanns-mono # font with icons
     pavucontrol # audio controller
     wl-clipboard # Wayland clipboard support
+    wl-mirror # method to mirror outputs
   ];
 
   programs = {
