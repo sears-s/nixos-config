@@ -20,14 +20,17 @@ lib.mkIf specialArgs.laptop {
 
   services = {
     # Automatic timezone
-    # TODO: geoclue can't see WiFi
-    # automatic-timezoned.enable = true;
+    automatic-timezoned.enable = true;
 
     # Needed for casting
     avahi.enable = true;
 
     # Bluetooth manager
     blueman.enable = config.hardware.bluetooth.enable;
+
+    # Use Google API for geolocation
+    # TODO: builtins.readFile requires --impure
+    geoclue2.geoProviderUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=${builtins.readFile /persist/googleGeolocationKey}";
 
     # Thunderbolt daemon
     hardware.bolt.enable = true;

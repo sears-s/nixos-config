@@ -244,10 +244,7 @@ lib.mkIf specialArgs.graphical {
     # Reduces blue light at night
     gammastep = lib.mkIf (!specialArgs.vm) {
       enable = true;
-      # TODO: switch to geoclue2 when working
-      # provider = "geoclue2";
-      latitude = 29.4;
-      longitude = -98.5;
+      provider = "geoclue2";
       temperature.night = 2000;
     };
 

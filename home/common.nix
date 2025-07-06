@@ -22,7 +22,8 @@
         };
         grep = lib.mkIf config.programs.ripgrep.enable "rg";
         impls = "sudo find / -mount -type f -printf '%h/%f\\n' | grep -iv cache | less";
-        nixr = "sudo nixos-rebuild switch --flake /home/${specialArgs.username}/proj/nixos-config/ --accept-flake-config";
+        # TODO: remove --impure when builins.readFile removed from geoclue
+        nixr = "sudo nixos-rebuild switch --flake /home/${specialArgs.username}/proj/nixos-config/ --accept-flake-config --impure";
         top = lib.mkIf config.programs.bottom.enable "bottom";
       };
     };
