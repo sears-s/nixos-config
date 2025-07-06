@@ -143,8 +143,7 @@
             # Check for secrets
             detect-private-keys.enable = true;
             ripsecrets.enable = true;
-            # TODO: re-enable when fixed upstream
-            # trufflehog.enable = true;
+            trufflehog.enable = true;
 
             # Misc
             check-added-large-files.enable = true;

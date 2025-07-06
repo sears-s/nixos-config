@@ -38,6 +38,9 @@ lib.mkIf specialArgs.laptop {
       pulse.enable = true;
     };
 
+    # Enable printing
+    printing.enable = true;
+
     # Enable power management
     # TODO: replace with tuneD when available for Nix
     tlp.enable = true;

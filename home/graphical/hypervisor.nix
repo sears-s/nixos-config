@@ -39,5 +39,8 @@ lib.mkIf (specialArgs.graphical && specialArgs.hypervisor) {
     # Suspend VM after 5 minutes
     AUTOPAUSE="on"
     AUTOPAUSE_TIME="300"
+
+    # Add smartcard support
+    RDP_FLAGS="/cert:tofu /sound /microphone /smartcard"
   '';
 }
