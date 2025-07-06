@@ -24,6 +24,9 @@
       # Bluetooth directory
       ++ lib.optional config.hardware.bluetooth.enable "/var/lib/bluetooth"
 
+      # Flatpak directory
+      ++ lib.optional config.services.flatpak.enable "/var/lib/flatpak"
+
       # NetworkManager directories
       ++ lib.optionals config.networking.networkmanager.enable [
         "/etc/NetworkManager/system-connections"
@@ -66,6 +69,9 @@
 
       # Podman directory
       ++ lib.optional config.virtualisation.containers.enable ".local/share/containers"
+
+      # OpenBubbles directory
+      ++ lib.optional config.services.flatpak.enable ".var/app/app.openbubbles.OpenBubbles"
 
       # Winapps directory
       ++ lib.optional (specialArgs.graphical && specialArgs.hypervisor) ".local/share/winapps"

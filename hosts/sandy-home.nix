@@ -7,6 +7,9 @@
   ...
 }:
 {
+  # Extra home packages for host
+  home.packages = with pkgs; [ globalprotect-openconnect ];
+
   # Setup monitor profiles
   services.kanshi.settings = [
     {
