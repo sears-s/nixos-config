@@ -37,7 +37,10 @@
       ++ lib.optional config.virtualisation.libvirtd.enable "/var/lib/libvirt"
 
       # Podman directory
-      ++ lib.optional config.virtualisation.containers.enable "/var/lib/containers";
+      ++ lib.optional config.virtualisation.containers.enable "/var/lib/containers"
+
+      # Tailscale directory
+      ++ lib.optional config.services.tailscale.enable "/var/lib/tailscale";
 
     files =
       [
@@ -94,6 +97,8 @@
         ".config/Slack"
         ".local/share/app.bluebubbles.BlueBubbles"
         ".local/share/remmina"
+        ".local/share/Smart Code ltd/Stremio"
+        ".stremio-server"
       ];
   };
 }

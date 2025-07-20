@@ -17,6 +17,7 @@ lib.mkIf (specialArgs.graphical && specialArgs.extra) {
     remmina # RDP/VNC client
     slack # official Slack client
     spotify # official Spotify client
+    stremio # media streaming client
     vlc # video player
     zoom-us # official Zoom client
   ];

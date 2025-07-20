@@ -72,8 +72,11 @@
   services = {
     # Encrypted DNS
     dnscrypt-proxy2 = {
-      enable = true;
-      settings.require_dnssec = true;
+      enable = false;
+      settings = {
+        ignore_system_dns = false; # hopefully fixes captive portals
+        require_dnssec = true;
+      };
       # Defaults: https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
     };
 

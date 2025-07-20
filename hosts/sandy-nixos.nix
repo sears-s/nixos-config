@@ -19,4 +19,7 @@
     kernelModules = [ "kvm-intel" ];
   };
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Tailscale client
+  services.tailscale.enable = true;
 }
