@@ -196,7 +196,10 @@
             actionlint.enable = true;
 
             # Check for typos
-            typos.enable = true;
+            typos = {
+              enable = true;
+              settings.ignored-words = [ "noice" ];
+            };
           };
         };
       });
