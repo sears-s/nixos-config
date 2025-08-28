@@ -93,18 +93,17 @@ lib.mkIf specialArgs.graphical {
             "sway/scratchpad"
           ];
           modules-center = [ "clock" ];
-          modules-right =
-            [
-              "tray"
-              "keyboard-state"
-              "pulseaudio"
-              "network"
-            ]
-            ++ lib.optional (!specialArgs.vm) "idle_inhibitor"
-            ++ lib.optionals specialArgs.laptop [
-              "backlight"
-              "battery"
-            ];
+          modules-right = [
+            "tray"
+            "keyboard-state"
+            "pulseaudio"
+            "network"
+          ]
+          ++ lib.optional (!specialArgs.vm) "idle_inhibitor"
+          ++ lib.optionals specialArgs.laptop [
+            "backlight"
+            "battery"
+          ];
           backlight = lib.mkIf specialArgs.laptop {
             format = "{percent}% {icon}";
             format-icons = [
@@ -323,6 +322,9 @@ lib.mkIf specialArgs.graphical {
 
         # Audio controller
         { app_id = "org.pulseaudio.pavucontrol"; }
+
+        # Bitwarden
+        { title = "Bitwarden"; }
 
         # Chromium smart card PIN prompt
         { title = "Sign in to Security Device"; }

@@ -9,7 +9,7 @@
 lib.mkIf (specialArgs.graphical && specialArgs.extra) {
   home.packages = with pkgs; [
     bluebubbles # iMessage client
-    discord-canary # official Discord client, beta Wayland support
+    discord # official Discord client
     foliate # eBook reader
     obsidian # markdown notes
     onlyoffice-desktopeditors # office suite
@@ -109,7 +109,7 @@ lib.mkIf (specialArgs.graphical && specialArgs.extra) {
         brave
         obsidian
         spotify
-        discord-canary
+        discord
         slack
         bluebubbles
       ]
