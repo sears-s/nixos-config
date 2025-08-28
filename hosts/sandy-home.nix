@@ -8,7 +8,7 @@
 }:
 {
   # Extra home packages for host
-  home.packages = with pkgs; [ globalprotect-openconnect ];
+  home.packages = with pkgs; [ gpclient ];
 
   # Setup monitor profiles
   services.kanshi.settings = [
