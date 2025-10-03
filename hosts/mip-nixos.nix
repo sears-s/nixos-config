@@ -45,7 +45,7 @@
 
   services = {
     # No automatic timezone
-    automatic-timezoned.enable = lib.mkForce true;
+    automatic-timezoned.enable = lib.mkForce false;
 
     # Can't use here
     dnscrypt-proxy2.enable = lib.mkForce false;
