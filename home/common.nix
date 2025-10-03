@@ -7,8 +7,19 @@
   ...
 }:
 {
-  # Set state version
-  home.stateVersion = specialArgs.stateVersion;
+  home = {
+    # Programs not available as a home-manager program
+    packages = with pkgs; [
+      dig # DNS troubleshooting
+      file # get file type by header
+      jq # JSON parsing
+      p7zip # extract 7Z
+      tcpdump # packet capture
+      unzip # extract ZIP
+    ];
+    # Set state version
+    inherit (specialArgs) stateVersion;
+  };
 
   programs = {
     # fish
