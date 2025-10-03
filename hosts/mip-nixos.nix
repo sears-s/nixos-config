@@ -36,15 +36,12 @@
     };
   };
 
-  # Add local DNS and NTP servers
-  networking =
-    let
-      srv = "10.50.1.10";
-    in
-    {
-      nameservers = lib.mkBefore [ srv ];
-      timeServers = lib.mkBefore [ srv ];
-    };
+  # Add NTP servers
+  networking.timeServers = lib.mkBefore [
+    "10.50.1.10"
+    "10.50.1.11"
+    "10.50.1.12"
+  ];
 
   services = {
     # No automatic timezone
