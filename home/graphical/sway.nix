@@ -310,6 +310,12 @@ lib.mkIf specialArgs.graphical {
   # Configure SwayWM
   wayland.windowManager.sway = {
     enable = true;
+
+    # Fix Java applications
+    extraSessionCommands = ''
+      export _JAVA_AWT_WM_NONREPARENTING=1
+    '';
+
     config = {
       bars = [ { command = lib.getExe pkgs.waybar; } ];
       defaultWorkspace = "workspace number 1";
@@ -411,7 +417,7 @@ lib.mkIf specialArgs.graphical {
         '.blueman-manager-wrapped' = '󰂯'
         '.virt-manager-wrapped' = ''
         'bluebubbles' = '󰣓'
-        'Brave-browser' = ''
+        'brave-browser' = ''
         'com.github.johnfactotum.Foliate' = ''
         'com.obsproject.Studio' = '󰑋'
         'discord' = ''

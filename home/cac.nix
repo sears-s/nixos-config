@@ -10,6 +10,8 @@ lib.mkIf specialArgs.cac {
   # Source: https://nixos.wiki/wiki/Web_eID
 
   # Configure Firefox to use p11-kit-proxy
+  # If it stops working, an older p11-kit version was updated and removed, but Firefox still points to the older version in the Nix store
+  # Unload the p11-kit-proxy module in Firefox security devices, then restart Firefox
   programs.firefox.policies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
 
   # One shot service to add the module for Chromium browsers

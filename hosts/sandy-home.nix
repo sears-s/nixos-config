@@ -104,7 +104,7 @@
           }
           {
             criteria = "$right";
-            position = "3456,0";
+            position = "3072,0";
           }
         ];
       };
