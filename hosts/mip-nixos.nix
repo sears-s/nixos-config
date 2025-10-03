@@ -36,13 +36,17 @@
     };
   };
 
-  # Add local NTP servers
+  # Add NTP servers
   networking.timeServers = lib.mkBefore [
-    "ARGOS-DC-1.argos.net"
-    "ARGOS-DC-2.argos.net"
+    "10.50.1.10"
+    "10.50.1.11"
+    "10.50.1.12"
   ];
 
   services = {
+    # No automatic timezone
+    automatic-timezoned.enable = lib.mkForce true;
+
     # Can't use here
     dnscrypt-proxy2.enable = lib.mkForce false;
 
@@ -52,4 +56,7 @@
     # Load Nvidia driver to Xorg and Wayland
     xserver.videoDrivers = [ "nvidia" ];
   };
+
+  # Force timezone to Central
+  time.timeZone = lib.mkForce "US/Central";
 }

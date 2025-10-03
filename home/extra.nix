@@ -16,6 +16,7 @@ lib.mkIf specialArgs.extra {
     glow # terminal Markdown renderer
     grex # generate regex from test cases
     mosh # client for supported SSH servers on poor connections
+    openvpn # OpenVPN client
     pciutils # PCI device utilities
     progress # show progress for coreutil programs like cp, mv
     pv # show progress for pipes
