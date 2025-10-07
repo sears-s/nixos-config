@@ -108,6 +108,7 @@
       };
       dates = "weekly";
       flake = "github:sears-s/nixos-config";
+      flags = [ "--impure" ];
     };
   };
 
@@ -127,15 +128,16 @@
       # Create user
       ${specialArgs.username} = {
         description = "Sears Schulz";
-        extraGroups =
-          [ "wheel" ]
-          ++ lib.optional config.networking.networkmanager.enable "networkmanager"
-          ++ lib.optionals config.virtualisation.libvirtd.enable [
-            "libvirtd"
-            # Required by winapps
-            "libvirt"
-            "kvm"
-          ];
+        extraGroups = [
+          "wheel"
+        ]
+        ++ lib.optional config.networking.networkmanager.enable "networkmanager"
+        ++ lib.optionals config.virtualisation.libvirtd.enable [
+          "libvirtd"
+          # Required by winapps
+          "libvirt"
+          "kvm"
+        ];
         hashedPasswordFile = "${specialArgs.persistDir}/hashedPassword";
         isNormalUser = true;
         openssh.authorizedKeys.keys = [ specialArgs.sshPublicKey ];
