@@ -12,7 +12,9 @@ lib.mkIf (specialArgs.graphical && specialArgs.security) {
   home.packages = with pkgs; [
     autopsy # disk forensics tool
     burpsuite # web exploitation
+    binaryninja-free # reverse engineering
     ghidra # reverse engineering
+    ida-free # reverse engineering
     wireshark # view PCAPs (TODO: how to run capture)
   ];
 }
