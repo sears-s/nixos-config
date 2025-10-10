@@ -14,7 +14,6 @@ lib.mkIf (specialArgs.graphical && specialArgs.security) {
     burpsuite # web exploitation
     binaryninja-free # reverse engineering
     ghidra # reverse engineering
-    ida-free # reverse engineering
     wireshark # view PCAPs (TODO: how to run capture)
   ];
 }
