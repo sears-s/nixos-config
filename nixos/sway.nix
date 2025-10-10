@@ -10,8 +10,14 @@ lib.mkIf specialArgs.graphical {
   hardware.graphics.enable = true;
 
   security = {
-    # Needed to make swaylock work
-    pam.services.swaylock = { };
+    pam.services = {
+      # Needed to make swaylock work
+      swaylock = { };
+
+      # Automatically unlock gnome-keyring on login
+      greetd.enableGnomeKeyring = true;
+      login.enableGnomeKeyring = true;
+    };
 
     # Enable polkit
     polkit.enable = true;
