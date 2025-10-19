@@ -311,6 +311,10 @@ lib.mkIf specialArgs.graphical {
   wayland.windowManager.sway = {
     enable = true;
 
+    # Use unstable version since Chromium crashing
+    # https://github.com/swaywm/sway/issues/8194
+    package = specialArgs.inputs.nixpkgs-unstable.legacyPackages.${specialArgs.system}.sway;
+
     # Fix Java applications
     extraSessionCommands = ''
       export _JAVA_AWT_WM_NONREPARENTING=1
