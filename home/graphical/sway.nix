@@ -386,6 +386,11 @@ lib.mkIf specialArgs.graphical {
             "exec ${lib.getExe' pkgs.pulseaudio "pactl"} set-source-mute @DEFAULT_SOURCE@ toggle";
           "${mod}+XF86AudioLowerVolume" = "${volumeMicCmd} -${volumeStep}%";
           "${mod}+XF86AudioRaiseVolume" = "${volumeMicCmd} +${volumeStep}%";
+
+          # Screenshot
+          Print = ''
+            exec ${lib.getExe pkgs.grim} -g "$(${lib.getExe pkgs.slurp})" "$HOME/$(date '+%y-%m-%d_%H-%M-%S').png"
+          '';
         };
       menu = "${lib.getExe pkgs.rofi} -show drun";
       modifier = "Mod4";
