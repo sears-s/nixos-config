@@ -15,7 +15,6 @@ lib.mkIf (specialArgs.graphical && specialArgs.extra) {
     onlyoffice-desktopeditors # office suite
     qbittorrent # BitTorrent client
     remmina # RDP/VNC client
-    slack # official Slack client
     spotify # official Spotify client
     stremio # media streaming client
     vlc # video player
@@ -66,7 +65,6 @@ lib.mkIf (specialArgs.graphical && specialArgs.extra) {
           ''class="obsidian"''
           ''class="Spotify"''
           ''class="discord"''
-          ''class="Slack"''
           ''app_id="bluebubbles"''
         ];
       in
@@ -110,7 +108,6 @@ lib.mkIf (specialArgs.graphical && specialArgs.extra) {
         obsidian
         spotify
         discord
-        slack
         bluebubbles
       ]
     );

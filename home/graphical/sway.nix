@@ -438,7 +438,6 @@ lib.mkIf specialArgs.graphical {
         'org.qbittorrent.qBittorrent' = '󰍇'
         'org.remmina.Remmina' = '󰢹'
         'org.wireshark.Wireshark' = '󱙳'
-        'Slack' = '󰒱'
         'Spotify' = '󰓇'
         'vlc' = '󰕼'
         'zoom' = '󰍫'

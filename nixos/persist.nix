@@ -91,7 +91,6 @@
       ".config/obsidian"
       ".config/remmina"
       ".config/spotify"
-      ".config/Slack"
       ".local/share/app.bluebubbles.BlueBubbles"
       ".local/share/remmina"
       ".local/share/Smart Code ltd/Stremio"
