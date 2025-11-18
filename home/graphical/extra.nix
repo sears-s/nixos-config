@@ -92,9 +92,6 @@ lib.mkIf (specialArgs.graphical && specialArgs.extra) {
             "[${builtins.elemAt apps 4}] move ${defaultWorkspace}"
             "[${builtins.elemAt apps 4}] move up"
             "[${builtins.elemAt apps 4}] move up"
-            "[${builtins.elemAt apps 5}] move ${defaultWorkspace}"
-            "[${builtins.elemAt apps 5}] move up"
-            "[${builtins.elemAt apps 5}] move up"
             "[${builtins.elemAt apps 3}] layout tabbed"
           ]
         );
