@@ -231,21 +231,6 @@
           };
           security = true;
         };
-        mip = mkHost {
-          hostName = "mip";
-          cac = true;
-          disk = {
-            device = "/dev/nvme0n1";
-            encrypt = true;
-            swapSize = "8G";
-            tmpfsSize = "4G";
-          };
-          graphical = true;
-          hypervisor = true;
-          laptop = true;
-          secureBoot = false;
-          security = true;
-        };
         sandy = mkHost {
           hostName = "sandy";
           cac = true;
