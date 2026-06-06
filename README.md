@@ -21,7 +21,8 @@ enable_network 0
 quit
 ```
 
-Set `root` password with `passwd` to continue installation over SSH. Clone this repository:
+Set `root` password with `passwd` to continue installation over SSH.
+Clone this repository:
 
 ```bash
 git clone https://github.com/sears-s/nixos-config.git

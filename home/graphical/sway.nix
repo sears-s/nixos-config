@@ -55,10 +55,7 @@ lib.mkIf specialArgs.graphical {
 
     # Launcher
     # TODO: add plugins
-    rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
-    };
+    rofi.enable = true;
 
     # Idle screen locker
     swaylock = lib.mkIf (!specialArgs.vm) {
@@ -267,24 +264,12 @@ lib.mkIf specialArgs.graphical {
       in
       {
         enable = true;
-        events = [
-          {
-            event = "before-sleep";
-            command = lockCmd;
-          }
-          {
-            event = "lock";
-            command = lockCmd;
-          }
-          {
-            event = "unlock";
-            command = unlockCmd;
-          }
-          {
-            event = "after-resume";
-            command = resumeCmd;
-          }
-        ];
+        events = {
+          before-sleep = lockCmd;
+          lock = lockCmd;
+          unlock = unlockCmd;
+          after-resume = resumeCmd;
+        };
         timeouts = [
           # Lock after 10 minutes
           {

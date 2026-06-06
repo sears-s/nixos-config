@@ -16,7 +16,7 @@ lib.mkIf (specialArgs.graphical && specialArgs.extra) {
     qbittorrent # BitTorrent client
     remmina # RDP/VNC client
     spotify # official Spotify client
-    stremio # media streaming client
+    # stremio # media streaming client
     vlc # video player
     zoom-us # official Zoom client
   ];
@@ -62,7 +62,7 @@ lib.mkIf (specialArgs.graphical && specialArgs.extra) {
         mod = config.wayland.windowManager.sway.config.modifier;
         apps = [
           ''class="Brave-browser"''
-          ''class="obsidian"''
+          ''app_id="obsidian"''
           ''class="Spotify"''
           ''class="discord"''
           ''app_id="bluebubbles"''

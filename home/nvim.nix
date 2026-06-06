@@ -9,7 +9,7 @@
 {
   # If lib.mkIf is used, imports isn't recognized
   imports = lib.optionals specialArgs.extra [
-    specialArgs.inputs.nixvim.homeManagerModules.nixvim
+    specialArgs.inputs.nixvim.homeModules.nixvim
     (
       let
         inherit (config.lib.nixvim) mkRaw;
@@ -171,7 +171,7 @@
                   python = [ "ruff" ];
                 };
                 formatters = {
-                  nixfmt.command = lib.getExe pkgs.nixfmt-rfc-style;
+                  nixfmt.command = lib.getExe pkgs.nixfmt;
                   prettierd.command = lib.getExe pkgs.prettierd;
                   ruff.command = lib.getExe pkgs.ruff;
                 };

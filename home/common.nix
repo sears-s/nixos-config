@@ -22,6 +22,12 @@
   };
 
   programs = {
+    # Better git syntax highlighting
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+    };
+
     # fish
     fish = {
       enable = true;
@@ -42,8 +48,7 @@
     # git
     git = {
       enable = true;
-      delta.enable = true; # better syntax highlighting
-      extraConfig = {
+      settings = {
         commit.gpgsign = true;
         core.editor = specialArgs.editor;
         credential.helper = "libsecret";

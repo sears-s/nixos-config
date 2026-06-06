@@ -71,7 +71,7 @@
 
   services = {
     # Encrypted DNS
-    dnscrypt-proxy2 = {
+    dnscrypt-proxy = {
       enable = false;
       settings = {
         ignore_system_dns = false; # hopefully fixes captive portals

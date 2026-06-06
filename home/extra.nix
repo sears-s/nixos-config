@@ -18,7 +18,7 @@ lib.mkIf specialArgs.extra {
     mosh # client for supported SSH servers on poor connections
     openvpn # OpenVPN client
     pciutils # PCI device utilities
-    progress # show progress for coreutil programs like cp, mv
+    progress # show progress for coreutils programs like cp, mv
     pv # show progress for pipes
     viu # terminal image viewer (kitty or ghostty)
     speedtest-cli # internet speed test
