@@ -74,7 +74,6 @@
                 "${settings.disk.device}3";
 
             # Default settings
-            cac = false;
             disk = {
               device = "/dev/vda";
               encrypt = false;
@@ -230,7 +229,6 @@
         };
         sandy = mkHost {
           hostName = "sandy";
-          cac = true;
           disk = {
             device = "/dev/nvme0n1";
             encrypt = true;
